@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון בליסטיקה חיצונית — 5.56×45 נאטו</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>מחשבון בליסטיקה חיצונית — 5.56×45 נאטו</h1>
+            <p class="subtitle">מודל G1 | ISA 15°C Sea Level | v3.0</p>
+        </header>
+
+        <section class="card">
+            <h2 class="section-title">בחירת נשק ותחמושת</h2>
+            <div class="grid">
+                <label class="field">
+                    <span class="label-text">נשק / קנה:</span>
+                    <select id="weapon"></select>
+                    <span class="hint">בחר סוג נשק לפי אורך הקנה</span>
+                </label>
+                <label class="field">
+                    <span class="label-text">סוג תחמושת / קליע:</span>
+                    <select id="bullet"></select>
+                    <span class="hint">בחר משקל וסוג קליע</span>
+                </label>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">פרמטרים מחושבים</h2>
+            <div class="grid">
+                <label class="field">
+                    <span class="label-text">מהירות פיה (m/s):</span>
+                    <input type="number" id="v0" step="1" min="0">
+                    <span class="hint">מחושב אוטומטית — ניתן לדרוס ידנית</span>
+                </label>
+                <label class="field">
+                    <span class="label-text">מקדם בליסטי G1 (BC):</span>
+                    <input type="number" id="bc" step="0.001" readonly>
+                </label>
+                <label class="field">
+                    <span class="label-text">משקל קליע (gr):</span>
+                    <input type="number" id="mass" step="1" readonly>
+                </label>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">כוונת ואפס</h2>
+            <div class="grid">
+                <label class="field">
+                    <span class="label-text">גובה כוונת מעל קנה (mm):</span>
+                    <input type="number" id="sight" step="1" min="0" value="150">
+                    <span class="hint">M4A1 + ACOG: 44mm  |  Iron sights: 63mm  |  Aimpoint: 41mm</span>
+                </label>
+                <label class="field">
+                    <span class="label-text">מרחק אפס (זירו) (מ'):</span>
+                    <input type="number" id="zero" step="25" min="25" value="75">
+                    <span class="hint">מומלץ כפולות של 25 מ'</span>
+                </label>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">טבלת בליסטיקה — 5.56×45 נאטו</h2>
+            <div class="table-wrap">
+                <table class="ballistic-table">
+                    <thead>
+                        <tr>
+                            <th>מרחק<br>(מ')</th>
+                            <th>זמן עוף<br>(שנ')</th>
+                            <th>מהירות<br>(m/s)</th>
+                            <th>אנרגיה<br>(ג'אול)</th>
+                            <th>נפילה טהורה<br>(ס"מ)</th>
+                            <th>מסלול קליע<br>(ס"מ)</th>
+                            <th>סטייה<br>(MOA)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ballistic-tbody"></tbody>
+                </table>
+            </div>
+            <p class="note">
+                ירוק = מעל קו הכוון &nbsp;|&nbsp; אדום = מתחת &nbsp;|&nbsp;
+                נפילה טהורה = כבידה בלבד &nbsp;|&nbsp; MOA = 2.908 ס"מ ל-100 מ' &nbsp;|&nbsp;
+                מהירות מחושבת: ~9 m/s לכל אינץ' פחות מ-20"
+            </p>
+        </section>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
