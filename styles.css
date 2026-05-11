@@ -53,6 +53,75 @@ html, body {
     padding-bottom: 8px;
 }
 
+.card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #3a445e;
+    padding-bottom: 8px;
+}
+
+.card-head .section-title {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.range-pick {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.range-pick select {
+    background: #1f2638;
+    color: #e8eef7;
+    border: 1px solid #4a5572;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.range-pick select:focus {
+    outline: none;
+    border-color: #f5d061;
+}
+
+.chart-wrap {
+    position: relative;
+    background: #1f2638;
+    border-radius: 8px;
+    border: 1px solid #3a445e;
+    padding: 10px;
+}
+
+#chart {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: #0e1320;
+    border: 1px solid #f5d061;
+    color: #e8eef7;
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transform: translate(-50%, -110%);
+    white-space: nowrap;
+    z-index: 5;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

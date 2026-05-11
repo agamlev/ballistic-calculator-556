@@ -65,18 +65,48 @@
         </section>
 
         <section class="card">
+            <div class="card-head">
+                <h2 class="section-title">גרף בליסטי — מסלול הקליע</h2>
+                <label class="range-pick">
+                    <span class="label-text">טווח תצוגה:</span>
+                    <select id="chart-range">
+                        <option value="100">עד 100 מ'</option>
+                        <option value="200">עד 200 מ'</option>
+                        <option value="300" selected>עד 300 מ'</option>
+                        <option value="400">עד 400 מ'</option>
+                        <option value="500">עד 500 מ'</option>
+                        <option value="600">עד 600 מ'</option>
+                        <option value="700">עד 700 מ'</option>
+                        <option value="800">עד 800 מ'</option>
+                        <option value="900">עד 900 מ'</option>
+                        <option value="1000">עד 1000 מ'</option>
+                    </select>
+                </label>
+            </div>
+            <div class="chart-wrap">
+                <svg id="chart" viewBox="0 0 800 360" preserveAspectRatio="none" aria-label="גרף בליסטי"></svg>
+                <div id="chart-tooltip" class="chart-tooltip" hidden></div>
+            </div>
+            <p class="note">
+                הקו הכתום = מסלול הקליע מעל/מתחת לקו הכוון &nbsp;|&nbsp;
+                הקו האפור המקווקו = קו הכוון (LOS) &nbsp;|&nbsp;
+                הנקודה הצהובה = נקודת האפס (זירו)
+            </p>
+        </section>
+
+        <section class="card">
             <h2 class="section-title">טבלת בליסטיקה — 5.56×45 נאטו</h2>
             <div class="table-wrap">
                 <table class="ballistic-table">
                     <thead>
                         <tr>
                             <th>מרחק<br>(מ')</th>
+                            <th>מסלול קליע<br>(ס"מ)</th>
+                            <th>סטייה<br>(MOA)</th>
                             <th>זמן עוף<br>(שנ')</th>
                             <th>מהירות<br>(m/s)</th>
                             <th>אנרגיה<br>(ג'אול)</th>
                             <th>נפילה טהורה<br>(ס"מ)</th>
-                            <th>מסלול קליע<br>(ס"מ)</th>
-                            <th>סטייה<br>(MOA)</th>
                         </tr>
                     </thead>
                     <tbody id="ballistic-tbody"></tbody>
