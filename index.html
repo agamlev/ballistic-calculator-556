@@ -8,105 +8,70 @@
 </head>
 <body>
     <div class="app">
-        <header class="header">
-            <h1>מחשבון בליסטיקה חיצונית — 5.56×45 נאטו</h1>
-            <p class="subtitle">מודל G1 | ISA 15°C Sea Level | v3.0</p>
+        <header class="topbar">
+            <div class="topbar-row">
+                <span class="tb-title">BALLISTIC // 5.56×45 NATO</span>
+                <span class="tb-sub">G1 · ISA 15°C · SL · v3.2</span>
+            </div>
+            <h1 class="main-title">מחשבון בליסטיקה חיצונית</h1>
         </header>
 
-        <section class="card">
-            <h2 class="section-title">בחירת נשק ותחמושת</h2>
-            <div class="grid">
-                <label class="field">
-                    <span class="label-text">נשק / קנה:</span>
-                    <select id="weapon"></select>
-                    <span class="hint">בחר סוג נשק לפי אורך הקנה</span>
-                </label>
-                <label class="field">
-                    <span class="label-text">סוג תחמושת / קליע:</span>
-                    <select id="bullet"></select>
-                    <span class="hint">בחר משקל וסוג קליע</span>
-                </label>
+        <section class="panel panel-main">
+            <div class="panel-head">
+                <span class="ph-title">חישוב חי</span>
+                <div class="ph-actions">
+                    <label class="rp">
+                        <span class="rp-k">טווח גרף (מ')</span>
+                        <select id="chart-range" class="rp-v">
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300" selected>300</option>
+                            <option value="400">400</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                            <option value="1000">1000</option>
+                        </select>
+                    </label>
+                    <button id="add-loadout" type="button" class="btn btn-add">+ הוסף השוואה</button>
+                </div>
             </div>
-        </section>
 
-        <section class="card">
-            <h2 class="section-title">פרמטרים מחושבים</h2>
-            <div class="grid">
-                <label class="field">
-                    <span class="label-text">מהירות פיה (m/s):</span>
-                    <input type="number" id="v0" step="1" min="0">
-                    <span class="hint">מחושב אוטומטית — ניתן לדרוס ידנית</span>
-                </label>
-                <label class="field">
-                    <span class="label-text">מקדם בליסטי G1 (BC):</span>
-                    <input type="number" id="bc" step="0.001" readonly>
-                </label>
-                <label class="field">
-                    <span class="label-text">משקל קליע (gr):</span>
-                    <input type="number" id="mass" step="1" readonly>
-                </label>
-            </div>
-        </section>
+            <div id="loadouts" class="loadouts"></div>
 
-        <section class="card">
-            <h2 class="section-title">כוונת ואפס</h2>
-            <div class="grid">
-                <label class="field">
-                    <span class="label-text">גובה כוונת מעל קנה (mm):</span>
-                    <input type="number" id="sight" step="1" min="0" value="150">
-                    <span class="hint">M4A1 + ACOG: 44mm  |  Iron sights: 63mm  |  Aimpoint: 41mm</span>
-                </label>
-                <label class="field">
-                    <span class="label-text">מרחק אפס (זירו) (מ'):</span>
-                    <input type="number" id="zero" step="25" min="25" value="75">
-                    <span class="hint">מומלץ כפולות של 25 מ'</span>
-                </label>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="card-head">
-                <h2 class="section-title">גרף בליסטי — מסלול הקליע</h2>
-                <label class="range-pick">
-                    <span class="label-text">טווח תצוגה:</span>
-                    <select id="chart-range">
-                        <option value="100">עד 100 מ'</option>
-                        <option value="200">עד 200 מ'</option>
-                        <option value="300" selected>עד 300 מ'</option>
-                        <option value="400">עד 400 מ'</option>
-                        <option value="500">עד 500 מ'</option>
-                        <option value="600">עד 600 מ'</option>
-                        <option value="700">עד 700 מ'</option>
-                        <option value="800">עד 800 מ'</option>
-                        <option value="900">עד 900 מ'</option>
-                        <option value="1000">עד 1000 מ'</option>
-                    </select>
-                </label>
-            </div>
             <div class="chart-wrap">
                 <svg id="chart" viewBox="0 0 800 360" preserveAspectRatio="none" aria-label="גרף בליסטי"></svg>
                 <div id="chart-tooltip" class="chart-tooltip" hidden></div>
             </div>
-            <p class="note">
-                הקו הכתום = מסלול הקליע מעל/מתחת לקו הכוון &nbsp;|&nbsp;
-                הקו האפור המקווקו = קו הכוון (LOS) &nbsp;|&nbsp;
-                הנקודה הצהובה = נקודת האפס (זירו)
-            </p>
+
+            <div id="legend" class="legend"></div>
+
+            <div class="stats">
+                <div class="stat"><div class="k">BC G1 (A)</div><div class="v" id="stat-bc">—</div></div>
+                <div class="stat"><div class="k">משקל (gr)</div><div class="v" id="stat-mass">—</div></div>
+                <div class="stat"><div class="k">קנה (in)</div><div class="v" id="stat-barrel">—</div></div>
+                <div class="stat"><div class="k">V₀ (m/s)</div><div class="v" id="stat-v0">—</div></div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2 class="section-title">טבלת בליסטיקה — 5.56×45 נאטו</h2>
+        <section class="panel">
+            <div class="panel-head">
+                <span class="ph-title">טבלת בליסטיקה <small class="ph-sub">— מבוסס על תצורה A</small></span>
+                <span class="ph-meta">5.56×45</span>
+            </div>
             <div class="table-wrap">
                 <table class="ballistic-table">
                     <thead>
                         <tr>
-                            <th>מרחק<br>(מ')</th>
-                            <th>מסלול קליע<br>(ס"מ)</th>
-                            <th>סטייה<br>(MOA)</th>
-                            <th>זמן עוף<br>(שנ')</th>
-                            <th>מהירות<br>(m/s)</th>
-                            <th>אנרגיה<br>(ג'אול)</th>
-                            <th>נפילה טהורה<br>(ס"מ)</th>
+                            <th>מרחק<br><small>(מ')</small></th>
+                            <th>מסלול<br><small>(ס"מ)</small></th>
+                            <th>סטייה<br><small>(MOA)</small></th>
+                            <th>זמן<br><small>(שנ')</small></th>
+                            <th>מהירות<br><small>(m/s)</small></th>
+                            <th>אנרגיה<br><small>(ג'אול)</small></th>
+                            <th>נפילה<br><small>(ס"מ)</small></th>
                         </tr>
                     </thead>
                     <tbody id="ballistic-tbody"></tbody>
